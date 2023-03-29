@@ -37,7 +37,11 @@
                 </div>
                 <div class="hidden sm:ml-6 sm:block">
                     <div class="flex space-x-4">
-                        <a href="/"
+                        <a href="{{ route('list') }}"
+                           class="@if(request()->routeIs('list')) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block rounded-md px-3 py-2 text-base font-medium" aria-current="page">
+                            List
+                        </a>
+                        <a href="{{ route('create') }}"
                            class="@if(request()->routeIs('create')) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block rounded-md px-3 py-2 text-base font-medium" aria-current="page">
                             Create data
                         </a>
@@ -52,7 +56,11 @@
     </div>
     <div class="sm:hidden" id="mobile-menu">
         <div class="space-y-1 px-2 pt-2 pb-3">
-            <a href="/"
+            <a href="{{ route('list') }}"
+               class="@if(request()->routeIs('list')) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block rounded-md px-3 py-2 text-base font-medium" aria-current="page">
+                List
+            </a>
+            <a href="{{ route('update') }}"
                class="@if(request()->routeIs('create')) bg-gray-900 text-white @else text-gray-300 hover:bg-gray-700 hover:text-white @endif block rounded-md px-3 py-2 text-base font-medium" aria-current="page">
                 Create data
             </a>

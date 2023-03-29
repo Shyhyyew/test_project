@@ -13,7 +13,7 @@ class CreateController extends Controller
     {
         $validated = $request->validated();
 
-        $data = auth()->user()->data()->create(['json' => $validated['data']]);
+        $data = auth()->user()->data()->create(['json' => json_decode($validated['data'])]);
 
         $time = calculateExecutionTime();
         $size = DB::table('data')->select(DB::raw('SUM(LENGTH(json)) as size'))->first()->size;

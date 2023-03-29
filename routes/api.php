@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::delete('/data/{id}/delete', 'DeleteController');
 Route::middleware('auth:api')->group(function () {
     Route::match(['post', 'get'], '/data/create', 'CreateController');
     Route::match(['post', 'get'], '/data/{id}/update', 'UpdateController');
