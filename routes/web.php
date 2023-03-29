@@ -13,4 +13,5 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'CreateController');
+Route::get('/', 'CreateController')->name('create');
+Route::get('/update', 'UpdateController')->name('update');

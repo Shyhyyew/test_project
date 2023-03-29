@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\DataRequest;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\DB;
 
 class CreateController extends Controller
 {
@@ -13,11 +14,14 @@ class CreateController extends Controller
         $validated = $request->validated();
 
         $data = auth()->user()->data()->create(['json' => $validated['data']]);
-        $time = (microtime(true) -  LARAVEL_START) * 1000;
+
+        $time = calculateExecutionTime();
+        $size = DB::table('data')->select(DB::raw('SUM(LENGTH(json)) as size'))->first()->size;
 
         return $this->response([
             'execution_time' => $time,
-            'id' => $data->id
+            'id' => $data->id,
+            'used_space' => formatBytes($size)
         ]);
     }
 }

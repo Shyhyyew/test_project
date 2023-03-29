@@ -10,4 +10,7 @@ class Data extends Model
     use HasFactory;
 
     protected $fillable = ['json'];
+    protected $casts = [
+        'json' => 'object'
+    ];
 }

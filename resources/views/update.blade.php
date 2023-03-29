@@ -3,7 +3,7 @@
 @section('main')
 <div class="flex h-[90vh] w-full justify-center items-center">
     <div class="w-[35vw] shadow-xl p-10 rounded-lg bg-white">
-        <div class="mb-10" x-data="alertHandler()" @alert.window="init($event.detail); open = true;" x-cloak x-show="open">
+        <div class="mb-10" x-data="alertHandler()" @alert.window="init($event.detail); open = true;" x-show="open">
             <div class="flex w-full w-full overflow-hidden bg-white rounded-lg shadow-md">
                 <div class="flex items-center justify-center w-12 bg-emerald-500">
                     <svg class="w-6 h-6 text-white fill-current" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg">
@@ -13,11 +13,7 @@
 
                 <div class="px-4 py-2 -mx-3">
                     <div class="mx-3">
-                        <p class="text-sm text-gray-600">Data successfully stored!</p>
-                        <p class="text-sm text-gray-600">ID: <span class="font-semibold" x-text="data?.id"></span></p>
-                        <p class="text-sm text-gray-600">
-                            Used space: <span class="font-semibold" x-text="data?.used_space"></span>
-                        </p>
+                        <p class="text-sm text-gray-600">Data successfully updated!</p>
                         <p class="text-sm text-gray-600">
                             Execution time: <span class="font-semibold" x-text="data?.execution_time + 'ms'"></span>
                         </p>
@@ -27,14 +23,19 @@
         </div>
 
         <div class="mb-10">
-            <label for="pat" class="block text-sm text-gray-500">Personal Access Token</label>
+            <label for="username" class="block text-sm text-gray-500">Personal Access Token</label>
 
             <input id="pat" type="text" class="block mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" />
         </div>
-        <div>
-            <label for="json-data" class="block text-sm text-gray-500">JSON data</label>
+        <div class="mb-10">
+            <label for="data_id" class="block text-sm text-gray-500">ID</label>
 
-            <textarea id="json-data" type="text" class="block mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
+            <input id="data_id" type="number" class="block mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40" />
+        </div>
+        <div>
+            <label for="code" class="block text-sm text-gray-500">Code</label>
+
+            <textarea id="code" type="text" class="block mt-2 w-full placeholder-gray-400/70 rounded-lg border border-gray-200 bg-white px-5 py-2.5 text-gray-700 focus:border-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-40"></textarea>
         </div>
         <div class="mt-6">
             <button onclick="submit()" class="px-6 py-2 w-full font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
@@ -46,10 +47,11 @@
 
 <script>
     const submit = () => {
+        let id = document.getElementById('data_id').value;
         axios.create({
             headers: {"Authorization": "Bearer " + document.getElementById('pat').value}
-        }).post('data/create', {
-            "data": document.getElementById('json-data').value,
+        }).post('data/'+id+'/update', {
+            "code": document.getElementById('code').value,
         }).then((res) => {
             window.dispatchEvent(new CustomEvent('alert', {detail: res.data.data}))
         }).catch((e) => {

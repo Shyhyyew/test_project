@@ -16,4 +16,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function () {
     Route::match(['post', 'get'], '/data/create', 'CreateController');
+    Route::match(['post', 'get'], '/data/{id}/update', 'UpdateController');
 });
