@@ -23,11 +23,11 @@ In this page every data card has expandable HTML list.
 There is delete button in each card to delete data form db.
 
 ### Create page 
-There is create form in this page. In "Personal access token" field paste PAT from console login command.
+There is data creating form in this page. In "Personal access token" field paste PAT from console login command.
 To "Json data" field write valid json data. Click to "Create" button to create data.
 
 ### Update page
-Update form has 3 fields. To "Personal Access Token" field paste tour PAT from console login command.
+Updating data form has 3 fields. To "Personal Access Token" field paste tour PAT from console login command.
 To "Id" field write valid id of data. To "Code" field write valid php code which modifies "$data" object variable. For example:
 ```
 $data->list->sublist[0] = 9;
