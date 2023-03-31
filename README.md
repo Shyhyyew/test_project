@@ -1,4 +1,4 @@
-# Data CRUD
+# Laravel data CRUD project
 
 ## About project
 Simple Data CRUD website using Laravel.<br/>
